@@ -13,7 +13,7 @@ namespace Model
         public Prestamos Prestamos { get; set; }
         public List<Autores> Autores { get; set; }
         public List<Tipolibro> Tipolibro  { get; set; }
-        public string PrestamosForeignKey { get; set; }
+        public int PrestamosForeignKey { get; set; }
         
     }
 }

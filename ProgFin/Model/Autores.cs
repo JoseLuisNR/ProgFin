@@ -9,7 +9,7 @@ namespace Model
         public int IdAutor { get; set; }
         public string NombreAut { get; set; }
         public string ApellidoAut { get; set; }
-        public string LibrosForeignKey { get; set; }
+        public int LibrosForeignKey { get; set; }
         public Libros Libros { get; set; }
     }
 }

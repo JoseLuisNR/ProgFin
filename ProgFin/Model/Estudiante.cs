@@ -8,7 +8,7 @@ namespace Model
     {
         public int IdEstudiante { get; set; }
         public string Nombre { get; set; }
-        public string EstudianteForeignKey { get; set; }
+        public int EstudianteForeignKey { get; set; }
         public Prestamos Prestamos { get; set; }
     }
 }

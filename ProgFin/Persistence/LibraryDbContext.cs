@@ -6,7 +6,10 @@ namespace Persistence
 {
     public class LibraryDbContext : DbContext
     {
-        
+        public LibraryDbContext(DbContextOptions<LibraryDbContext> options)
+            : base(options)
+        { }
+
         public DbSet<Estudiante> Estudiantes { get; set; }
         public DbSet<Prestamos> Prestamos { get; set; } 
         public DbSet<Libros> Libros { get; set; }
@@ -20,7 +23,16 @@ namespace Persistence
                 .HasKey(e => e.IdEstudiante);
 
             modelBuilder.Entity<Prestamos>()
-                .HasKey(e => e.IdPrestamo);
+                .HasKey(p => p.IdPrestamo);
+
+            modelBuilder.Entity<Libros>()
+                .HasKey(l => l.IdLibro);
+
+            modelBuilder.Entity<Tipolibro>()
+                .HasKey(t => t.IdTipo);
+
+            modelBuilder.Entity<Autores>()
+                .HasKey(a => a.IdAutor);
 
 
             modelBuilder.Entity<Estudiante>()

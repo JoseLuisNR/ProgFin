@@ -11,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-
+using Persistence;
 
 namespace ProgFin
 {
@@ -27,6 +27,9 @@ namespace ProgFin
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var connection = Configuration.GetConnectionString("Dev");
+            services.AddDbContext<LibraryDbContext>
+                (options => options.UseSqlServer(connection));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
         }
