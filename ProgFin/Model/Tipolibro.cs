@@ -4,9 +4,11 @@ using System.Text;
 
 namespace Model
 {
-    class Tipolibro
+    public class Tipolibro
     {
         public int IdTipo { get; set; }
         public string NombreTipo { get; set; }
+        public Libros Libros { get; set; }
+        public string TipolibroForeignKey { get; set; }
     }
 }

@@ -4,11 +4,11 @@ using System.Text;
 
 namespace Model
 {
-    class Estudiante
+    public class Estudiante
     {
         public int IdEstudiante { get; set; }
         public string Nombre { get; set; }
         public string EstudianteForeignKey { get; set; }
-        public List<Prestamos> Prestamos { get; set; }
+        public Prestamos Prestamos { get; set; }
     }
 }
