@@ -8,32 +8,32 @@ using System.Text;
 
 namespace Service
 {
-    public interface IEstudianteService
+    public interface ITipolibroService
     {
-        IEnumerable<Estudiante> GetAll();
-        bool Add(Estudiante Model);
+        IEnumerable<Tipolibro> GetAll();
+        bool Add(Tipolibro Model);
         bool Delete(int id);
-        bool Update(Estudiante Model);
-        Estudiante Get(int id);
+        bool Update(Tipolibro Model);
+        Tipolibro Get(int id);
     }
-    public class EstudianteService : IEstudianteService
+    public class TipolibroService : ITipolibroService
     {
         private readonly LibraryDbContext _libraryDbContext;
 
-        public EstudianteService(
+        public TipolibroService(
             LibraryDbContext libraryDbContext
             )
         {
             _libraryDbContext = libraryDbContext;
         }
 
-        public IEnumerable<Estudiante> GetAll()
+        public IEnumerable<Tipolibro> GetAll()
         {
-            var result = new List<Estudiante>();
+            var result = new List<Tipolibro>();
 
             try
             {
-                result = _libraryDbContext.Estudiantes.ToList();
+                result = _libraryDbContext.Tipolibros.ToList();
             }
             catch (System.Exception)
             {
@@ -42,13 +42,13 @@ namespace Service
 
             return result;
         }
-        public Estudiante Get(int id)
+        public Tipolibro Get(int id)
         {
-            var result = new Estudiante();
+            var result = new Tipolibro();
 
             try
             {
-                result = _libraryDbContext.Estudiantes.Single(x => x.IdEstudiante == id);
+                result = _libraryDbContext.Tipolibros.Single(x => x.IdTipo == id);
             }
             catch (System.Exception)
             {
@@ -57,7 +57,7 @@ namespace Service
 
             return result;
         }
-        public bool Add(Estudiante Model)
+        public bool Add(Tipolibro Model)
         {
             
             try
@@ -73,16 +73,16 @@ namespace Service
             
         }
 
-        public bool Update(Estudiante Model)
+        public bool Update(Tipolibro Model)
         {
 
             try
             {
-                var originalModel = _libraryDbContext.Estudiantes.Single(x =>
-                    x.IdEstudiante == Model.IdEstudiante
+                var originalModel = _libraryDbContext.Tipolibros.Single(x =>
+                    x.IdTipo == Model.IdTipo
                     );
-                originalModel.Nombre = Model.Nombre;
-                originalModel.Prestamos = Model.Prestamos;
+                originalModel.NombreTipo = Model.NombreTipo;
+                
                
 
                 _libraryDbContext.Update(Model);
@@ -99,7 +99,7 @@ namespace Service
         {
             try
             {
-                _libraryDbContext.Entry(new Estudiante { IdEstudiante = id }).State = EntityState.Deleted; ;
+                _libraryDbContext.Entry(new Tipolibro { IdTipo = id }).State = EntityState.Deleted; ;
                 _libraryDbContext.SaveChanges();
             }
             catch (System.Exception)

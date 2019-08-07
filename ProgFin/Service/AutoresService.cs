@@ -8,32 +8,32 @@ using System.Text;
 
 namespace Service
 {
-    public interface IEstudianteService
+    public interface IAutoresService
     {
-        IEnumerable<Estudiante> GetAll();
-        bool Add(Estudiante Model);
+        IEnumerable<Autores> GetAll();
+        bool Add(Autores Model);
         bool Delete(int id);
-        bool Update(Estudiante Model);
-        Estudiante Get(int id);
+        bool Update(Autores Model);
+        Autores Get(int id);
     }
-    public class EstudianteService : IEstudianteService
+    public class AutoresService : IAutoresService
     {
         private readonly LibraryDbContext _libraryDbContext;
 
-        public EstudianteService(
+        public AutoresService(
             LibraryDbContext libraryDbContext
             )
         {
             _libraryDbContext = libraryDbContext;
         }
 
-        public IEnumerable<Estudiante> GetAll()
+        public IEnumerable<Autores> GetAll()
         {
-            var result = new List<Estudiante>();
+            var result = new List<Autores>();
 
             try
             {
-                result = _libraryDbContext.Estudiantes.ToList();
+                result = _libraryDbContext.Autores.ToList();
             }
             catch (System.Exception)
             {
@@ -42,13 +42,13 @@ namespace Service
 
             return result;
         }
-        public Estudiante Get(int id)
+        public Autores Get(int id)
         {
-            var result = new Estudiante();
+            var result = new Autores();
 
             try
             {
-                result = _libraryDbContext.Estudiantes.Single(x => x.IdEstudiante == id);
+                result = _libraryDbContext.Autores.Single(x => x.IdAutor == id);
             }
             catch (System.Exception)
             {
@@ -57,7 +57,7 @@ namespace Service
 
             return result;
         }
-        public bool Add(Estudiante Model)
+        public bool Add(Autores Model)
         {
             
             try
@@ -73,16 +73,16 @@ namespace Service
             
         }
 
-        public bool Update(Estudiante Model)
+        public bool Update(Autores Model)
         {
 
             try
             {
-                var originalModel = _libraryDbContext.Estudiantes.Single(x =>
-                    x.IdEstudiante == Model.IdEstudiante
+                var originalModel = _libraryDbContext.Autores.Single(x =>
+                    x.IdAutor == Model.IdAutor
                     );
-                originalModel.Nombre = Model.Nombre;
-                originalModel.Prestamos = Model.Prestamos;
+                originalModel.NombreAut = Model.NombreAut;
+                originalModel.ApellidoAut = Model.ApellidoAut;
                
 
                 _libraryDbContext.Update(Model);
@@ -99,7 +99,7 @@ namespace Service
         {
             try
             {
-                _libraryDbContext.Entry(new Estudiante { IdEstudiante = id }).State = EntityState.Deleted; ;
+                _libraryDbContext.Entry(new Autores { IdAutor = id }).State = EntityState.Deleted; ;
                 _libraryDbContext.SaveChanges();
             }
             catch (System.Exception)

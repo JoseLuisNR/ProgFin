@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Persistence;
+using Service;
 
 namespace ProgFin
 {
@@ -30,7 +31,9 @@ namespace ProgFin
             var connection = Configuration.GetConnectionString("Dev");
             services.AddDbContext<LibraryDbContext>
                 (options => options.UseSqlServer(connection));
+            services.AddTransient<IEstudianteService, EstudianteService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            
 
         }
 
