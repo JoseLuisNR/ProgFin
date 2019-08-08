@@ -9,6 +9,6 @@ namespace Model
         public int IdTipo { get; set; }
         public string NombreTipo { get; set; }
         public Libros Libros { get; set; }
-        public string TipolibroForeignKey { get; set; }
+        public int TipolibroForeignKey { get; set; }
     }
 }

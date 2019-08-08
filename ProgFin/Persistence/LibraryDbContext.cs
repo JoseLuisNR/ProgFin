@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using Model;
 
 
@@ -6,8 +7,11 @@ namespace Persistence
 {
     public class LibraryDbContext : DbContext
     {
-        
-        public DbSet<Estudiante> Estudiantes { get; set; }
+        public LibraryDbContext(DbContextOptions<LibraryDbContext> options)
+            : base(options)
+        { }
+
+        public DbSet<estudiante> Estudiantes { get; set; }
         public DbSet<Prestamos> Prestamos { get; set; } 
         public DbSet<Libros> Libros { get; set; }
         public DbSet<Autores> Autores { get; set; }
@@ -16,14 +20,23 @@ namespace Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Estudiante>()
+            modelBuilder.Entity<estudiante>()
                 .HasKey(e => e.IdEstudiante);
 
             modelBuilder.Entity<Prestamos>()
-                .HasKey(e => e.IdPrestamo);
+                .HasKey(p => p.IdPrestamo);
+
+            modelBuilder.Entity<Libros>()
+                .HasKey(l => l.IdLibro);
+
+            modelBuilder.Entity<Tipolibro>()
+                .HasKey(t => t.IdTipo);
+
+            modelBuilder.Entity<Autores>()
+                .HasKey(a => a.IdAutor);
 
 
-            modelBuilder.Entity<Estudiante>()
+            modelBuilder.Entity<estudiante>()
                 .HasOne(e => e.Prestamos)
                 .WithMany(p => p.Estudiante)
                 .HasForeignKey(p => p.EstudianteForeignKey);
@@ -48,6 +61,11 @@ namespace Persistence
 
 
 
+        }
+
+        public void Add(object model)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -11,7 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-
+using Persistence;
+using Service;
 
 namespace ProgFin
 {
@@ -27,7 +28,16 @@ namespace ProgFin
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var connection = Configuration.GetConnectionString("Dev");
+            services.AddDbContext<LibraryDbContext>
+                (options => options.UseSqlServer(connection));
+            services.AddTransient<ILibrosService, LibrosService>();
+            services.AddTransient<IPrestamosService, PrestamosService>();
+            services.AddTransient<IAutoresService, AutoresService>();
+            services.AddTransient<IEstudianteService, EstudianteService>();
+            services.AddTransient<ITipolibroService, TipolibroService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            
 
         }
 
