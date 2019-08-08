@@ -15,7 +15,7 @@ namespace Model
 
         public DateTime FechaPrestamo { get; set; }
         public DateTime FechaEntregar { get; set; }
-        public List<Estudiante> Estudiante { get; set; }
+        public List<estudiante> Estudiante { get; set; }
         public List<Libros> Libros { get; set; }
     }
 }

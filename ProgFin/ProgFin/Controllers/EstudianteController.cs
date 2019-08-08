@@ -8,7 +8,7 @@ using Service;
 
 namespace ProgFin.Controllers
 {
-    [Route("[controller]")]
+    [Route("EstudianteController")]
     public class EstudianteController : Controller
     {
         private readonly IEstudianteService _estudianteService;
@@ -27,19 +27,19 @@ namespace ProgFin.Controllers
 
         // POST api/values
         [HttpPost]
-        public IActionResult Post([FromBody] Estudiante model)
+        public IActionResult Post([FromBody] estudiante Model)
         {
             return Ok(
-                _estudianteService.Add(model)
+                _estudianteService.Add(Model)
             );
         }
 
         // PUT api/values/5
         [HttpPut]
-        public IActionResult Put([FromBody] Estudiante model)
+        public IActionResult Put([FromBody] estudiante Model)
         {
             return Ok(
-                _estudianteService.Add(model)
+                _estudianteService.Add(Model)
             );
         }
 

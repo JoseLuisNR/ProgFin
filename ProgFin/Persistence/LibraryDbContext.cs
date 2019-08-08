@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using Model;
 
 
@@ -10,7 +11,7 @@ namespace Persistence
             : base(options)
         { }
 
-        public DbSet<Estudiante> Estudiantes { get; set; }
+        public DbSet<estudiante> Estudiantes { get; set; }
         public DbSet<Prestamos> Prestamos { get; set; } 
         public DbSet<Libros> Libros { get; set; }
         public DbSet<Autores> Autores { get; set; }
@@ -19,7 +20,7 @@ namespace Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Estudiante>()
+            modelBuilder.Entity<estudiante>()
                 .HasKey(e => e.IdEstudiante);
 
             modelBuilder.Entity<Prestamos>()
@@ -35,7 +36,7 @@ namespace Persistence
                 .HasKey(a => a.IdAutor);
 
 
-            modelBuilder.Entity<Estudiante>()
+            modelBuilder.Entity<estudiante>()
                 .HasOne(e => e.Prestamos)
                 .WithMany(p => p.Estudiante)
                 .HasForeignKey(p => p.EstudianteForeignKey);
@@ -60,6 +61,11 @@ namespace Persistence
 
 
 
+        }
+
+        public void Add(object model)
+        {
+            throw new NotImplementedException();
         }
     }
 }

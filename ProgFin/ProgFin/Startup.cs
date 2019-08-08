@@ -31,7 +31,11 @@ namespace ProgFin
             var connection = Configuration.GetConnectionString("Dev");
             services.AddDbContext<LibraryDbContext>
                 (options => options.UseSqlServer(connection));
+            services.AddTransient<ILibrosService, LibrosService>();
+            services.AddTransient<IPrestamosService, PrestamosService>();
+            services.AddTransient<IAutoresService, AutoresService>();
             services.AddTransient<IEstudianteService, EstudianteService>();
+            services.AddTransient<ITipolibroService, TipolibroService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             
 

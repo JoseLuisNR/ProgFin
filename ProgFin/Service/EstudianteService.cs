@@ -10,15 +10,16 @@ namespace Service
 {
     public interface IEstudianteService
     {
-        IEnumerable<Estudiante> GetAll();
-        bool Add(Estudiante Model);
+        IEnumerable<estudiante> GetAll();
+        bool Add(estudiante Model);
         bool Delete(int id);
-        bool Update(Estudiante Model);
-        Estudiante Get(int id);
+        bool Update(estudiante Model);
+        estudiante Get(int id);
     }
     public class EstudianteService : IEstudianteService
     {
         private readonly LibraryDbContext _libraryDbContext;
+       
 
         public EstudianteService(
             LibraryDbContext libraryDbContext
@@ -27,9 +28,9 @@ namespace Service
             _libraryDbContext = libraryDbContext;
         }
 
-        public IEnumerable<Estudiante> GetAll()
+        public IEnumerable<estudiante> GetAll()
         {
-            var result = new List<Estudiante>();
+            var result = new List<estudiante>();
 
             try
             {
@@ -42,9 +43,9 @@ namespace Service
 
             return result;
         }
-        public Estudiante Get(int id)
+        public estudiante Get(int id)
         {
-            var result = new Estudiante();
+            var result = new estudiante();
 
             try
             {
@@ -57,23 +58,26 @@ namespace Service
 
             return result;
         }
-        public bool Add(Estudiante Model)
+        public bool Add(estudiante Model)
         {
             
             try
             {
-                _libraryDbContext.Add(Model);
+                _libraryDbContext.Estudiantes.Add(Model);
                 _libraryDbContext.SaveChanges();
             }
             catch (System.Exception)
             {
+               
                 return false;
+                
+                
             }
             return true;
             
         }
 
-        public bool Update(Estudiante Model)
+        public bool Update(estudiante Model)
         {
 
             try
@@ -99,7 +103,7 @@ namespace Service
         {
             try
             {
-                _libraryDbContext.Entry(new Estudiante { IdEstudiante = id }).State = EntityState.Deleted; ;
+                _libraryDbContext.Entry(new estudiante { IdEstudiante = id }).State = EntityState.Deleted; ;
                 _libraryDbContext.SaveChanges();
             }
             catch (System.Exception)

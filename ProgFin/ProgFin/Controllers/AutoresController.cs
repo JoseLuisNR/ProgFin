@@ -8,7 +8,7 @@ using Service;
 
 namespace ProgFin.Controllers
 {
-    [Route("[controller]")]
+    [Route("AutoresController")]
     public class AutoresController : Controller
     {
         private readonly IAutoresService _AutoresService;
